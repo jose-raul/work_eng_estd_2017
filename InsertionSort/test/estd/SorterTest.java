@@ -1,5 +1,7 @@
 package estd;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,5 +15,15 @@ public class SorterTest {
 		sorter.sort(n);
 		Assert.assertArrayEquals(expected, n);
 	}
+	
+	@Test
+	public void sortStringTest() {
+		Sorter sorter = new Sorter();
+		String[] n = { "CD","AB"};
+		String[] expected = { "AB", "CD"};
+		sorter.sort(n);
+		System.out.println(Arrays.toString(n));
+		Assert.assertArrayEquals(expected, n);
+	}	
 
 }

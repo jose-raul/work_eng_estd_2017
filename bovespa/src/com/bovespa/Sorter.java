@@ -1,4 +1,4 @@
-package estd;
+package com.bovespa;
 
 public class Sorter {
 	
@@ -18,6 +18,7 @@ public class Sorter {
 	public void sort(Comparable[] a) {
 		int n = a.length;
 		for (int i = 1; i < n; i++) {
+			System.out.println(i);
 			Comparable aux = a[i];
 			int j = i - 1;
 			while ((j >= 0) && (a[j].compareTo(aux) > 0)) {

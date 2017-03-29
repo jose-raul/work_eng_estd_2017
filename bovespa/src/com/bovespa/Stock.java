@@ -3,7 +3,7 @@ package com.bovespa;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Stock {
+public class Stock implements Comparable<Stock> {
 	
 	private String code;
 	
@@ -63,6 +63,11 @@ public class Stock {
 
 	public void setMinPrice(BigDecimal minPrice) {
 		this.minPrice = minPrice;
+	}
+
+	@Override
+	public int compareTo(Stock arg0) {
+		return this.code.compareTo(arg0.getCode());
 	}
 	
 
