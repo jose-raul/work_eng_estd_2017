@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
-import estd.Node;
 import estd.SLinkedList;
 
 public class StockReader {
@@ -40,7 +39,7 @@ public class StockReader {
 		lines.forEach(line -> {
 			if (line.startsWith("01")) {
 				Stock stock = parseStock(line);
-				linkedList.add(new Node<>(stock));
+				linkedList.add(stock);
 			}
 		});
 		
