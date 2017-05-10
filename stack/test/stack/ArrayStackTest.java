@@ -26,15 +26,31 @@ public class ArrayStackTest {
 	
 	@Test
 	public void topTest() {
-
-		Stack<String> stack = new ArrayStack<>();
-		stack.push("A");
-		stack.push("B");
-		stack.push("C");
+		Stack<Integer> stack = new ArrayStack<>();
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
 		
-		Assert.assertEquals("C", stack.top());
-		Assert.assertEquals("C", stack.top());
+		Assert.assertEquals(Integer.valueOf(3), stack.top());
+		Assert.assertEquals(Integer.valueOf(3), stack.top());
 		Assert.assertEquals(3, stack.getSize());
 	}	
 
+	@Test
+	public void popTest() {
+		Stack<Integer> stack = new ArrayStack<>();
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+		
+		Assert.assertEquals(Integer.valueOf(3), stack.pop());
+		Assert.assertEquals(2, stack.getSize());
+		Assert.assertEquals(Integer.valueOf(2), stack.pop());
+		Assert.assertEquals(1, stack.getSize());
+		Assert.assertEquals(Integer.valueOf(1), stack.pop());
+		Assert.assertEquals(0, stack.getSize());
+		Assert.assertTrue(stack.isEmpty());
+	}	
+	
+	
 }

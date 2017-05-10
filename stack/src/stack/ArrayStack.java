@@ -5,6 +5,15 @@ public class ArrayStack<E> implements Stack<E> {
 	private E[] array = (E[]) new Object[20];
 
 	private int position = 0;
+	
+	public ArrayStack() {
+
+	}
+
+	public ArrayStack(int size) {
+
+	}
+
 
 	@Override
 	public void push(E e) {
@@ -19,7 +28,10 @@ public class ArrayStack<E> implements Stack<E> {
 
 	@Override
 	public E pop() {
-		return null;
+		E temp = array[position - 1];
+		array[position - 1] = null;
+		position--;
+		return temp;
 	}
 
 	@Override
