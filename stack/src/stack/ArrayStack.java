@@ -19,7 +19,10 @@ public class ArrayStack<E> implements Stack<E> {
 
 	@Override
 	public E pop() {
-		return null;
+		E temp = array[position - 1];
+		array[position - 1] = null;
+		position--;
+		return temp;
 	}
 
 	@Override
