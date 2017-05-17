@@ -1,19 +1,18 @@
 package exercicio;
 
+import stack.ArrayStack;
 import stack.Stack;
 
 public class P1 {
 
 	public Stack<Integer> toStack(int[] n) {
-		/*
-		 * Instanciar uma pilha
-		 * Percorrer o array n e para cada
-		 * elemento encontrado inserir na pilha
-		 * 
-		 * Retornar a pilha
-		 */
+		Stack<Integer> stack = new ArrayStack<>();
 		
-		return null;
+		for (int i : n) {
+			stack.push(i);
+		}
+		
+		return stack;
 	}
 
 }
