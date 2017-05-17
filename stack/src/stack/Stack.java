@@ -1,5 +1,7 @@
 package stack;
 
+import java.util.List;
+
 public interface Stack<E> {
 
 	void push(E e);
@@ -12,6 +14,10 @@ public interface Stack<E> {
 	
 	boolean isEmpty();
 	
+	List<E> pop(int n);
 	
+	List<E> clear();
+	
+	Stack<E> cloneStack();
 	
 }

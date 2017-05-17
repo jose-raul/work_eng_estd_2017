@@ -1,5 +1,7 @@
 package stack;
 
+import java.util.List;
+
 public class ArrayStack<E> implements Stack<E> {
 
 	private E[] array;
@@ -59,5 +61,30 @@ public class ArrayStack<E> implements Stack<E> {
 	@Override
 	public boolean isEmpty() {
 		return position == 0;
+	}
+
+	@Override
+	public List<E> pop(int n) {
+		/*
+		 * Criar uma lista (ArrayList)
+		 * Repetir pop n vezes e adiciona
+		 * cada elemento na lista
+		 * 
+		 * Retornar a lista
+		 */
+		return null;
+	}
+
+	@Override
+	public List<E> clear() {
+		/*
+		 * Chamar o pop passando o tamanho da pilha
+		 */
+		return null;
+	}
+
+	@Override
+	public Stack<E> cloneStack() {
+		return null;
 	}
 }
