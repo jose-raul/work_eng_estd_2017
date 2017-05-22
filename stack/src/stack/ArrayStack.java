@@ -87,6 +87,14 @@ public class ArrayStack<E> implements Stack<E> {
 
 	@Override
 	public Stack<E> cloneStack() {
-		return null;
+		Stack<E> clone = new ArrayStack<>();
+		
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] != null) {
+				clone.push(array[i]);
+			}
+		}
+		
+		return clone;
 	}
 }
