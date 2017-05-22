@@ -1,5 +1,6 @@
 package stack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayStack<E> implements Stack<E> {
@@ -21,13 +22,13 @@ public class ArrayStack<E> implements Stack<E> {
 
 	@Override
 	public void push(E e) {
-		
-		if(position == array.length) {
+
+		if (position == array.length) {
 			E[] temp = (E[]) new Object[array.length * 2];
 			System.arraycopy(array, 0, temp, 0, array.length);
 			array = temp;
 		}
-		
+
 		array[position] = e;
 		position++;
 	}
@@ -65,22 +66,23 @@ public class ArrayStack<E> implements Stack<E> {
 
 	@Override
 	public List<E> pop(int n) {
-		/*
-		 * Criar uma lista (ArrayList)
-		 * Repetir pop n vezes e adiciona
-		 * cada elemento na lista
-		 * 
-		 * Retornar a lista
-		 */
-		return null;
+
+		List<E> result = new ArrayList<>();
+
+		for (int i = 0; i < n; i++) {
+			E aux = pop();
+			result.add(aux);
+			if (isEmpty()) {
+				break;
+			}
+		}
+
+		return result;
 	}
 
 	@Override
 	public List<E> clear() {
-		/*
-		 * Chamar o pop passando o tamanho da pilha
-		 */
-		return null;
+		return pop(getSize());
 	}
 
 	@Override
