@@ -1,7 +1,5 @@
 package queue;
 
-import java.util.Arrays;
-
 public class ArrayQueue<E> implements Queue<E> {
 
 	private E[] array;
@@ -21,11 +19,27 @@ public class ArrayQueue<E> implements Queue<E> {
 	}
 
 	@Override
-	public void enqueue(E e) {
+	public synchronized void enqueue(E e) {
+		if (isFull()) {
+			E[] temp = (E[]) new Object[array.length * 2];
+			
+			int n = head;
+			for (int i = 0; i < array.length; i++) {
+				n = n % array.length; 
+				temp[i] = array[n];
+				n++;
+			}
+			head = 0;
+			tail = array.length;
+			array = temp;			
+		}
 		array[tail] = e;
-		tail++;
+		tail = (tail + 1) % array.length;
 		size++;
-		System.out.println(Arrays.toString(array));
+	}
+
+	private boolean isFull() {
+		return getSize() == array.length;
 	}
 
 	@Override
@@ -35,9 +49,8 @@ public class ArrayQueue<E> implements Queue<E> {
 		} else {
 			E aux = array[head];
 			array[head] = null;
-			head++;
+			head = (head + 1) % array.length;
 			size--;
-			System.out.println(Arrays.toString(array));
 			return aux;
 		}
 	}

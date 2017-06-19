@@ -3,11 +3,11 @@ package queue;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ArrayQueueTest {
+public class LinkedQueueTest {
 
 	@Test
 	public void enqueueTest() {
-		Queue<Integer> queue = new ArrayQueue<>(); 
+		Queue<Integer> queue = new LinkedQueue<>(); 
 		Assert.assertTrue(queue.isEmpty());
 		
 		queue.enqueue(1);
@@ -20,7 +20,7 @@ public class ArrayQueueTest {
 	
 	@Test
 	public void dequeueTest() {
-		Queue<Integer> queue = new ArrayQueue<>(); 
+		Queue<Integer> queue = new LinkedQueue<>(); 
 		
 		queue.enqueue(1);
 		queue.enqueue(2);
@@ -33,7 +33,7 @@ public class ArrayQueueTest {
 	
 	@Test
 	public void frontTest() {
-		Queue<Integer> queue = new ArrayQueue<>(); 
+		Queue<Integer> queue = new LinkedQueue<>(); 
 		
 		queue.enqueue(1);
 		queue.enqueue(2);
@@ -45,20 +45,5 @@ public class ArrayQueueTest {
 		Assert.assertEquals(Integer.valueOf(1), queue.front());
 		Assert.assertTrue(queue.getSize() == 3);
 	}	
-	
-	
-	@Test
-	public void circularTest() {
-		Queue<Integer> queue = new ArrayQueue<>(2); 
-		Assert.assertTrue(queue.isEmpty());
-		
-		queue.enqueue(1);
-		queue.enqueue(2);
-		queue.enqueue(3);
-		queue.enqueue(4);
-		queue.enqueue(5);
-		queue.enqueue(6);
-		queue.enqueue(7);
-	}
 		
 }
