@@ -12,4 +12,6 @@ public interface Queue<E> {
 	
 	int getSize();
 	
+	E[] getArray();
+	
 }

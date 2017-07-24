@@ -31,4 +31,10 @@ public class LinkedQueue<E> implements Queue<E> {
 		return list.size();
 	}
 
+	@Override
+	public E[] getArray() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

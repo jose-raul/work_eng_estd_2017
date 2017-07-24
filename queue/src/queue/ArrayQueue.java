@@ -69,4 +69,9 @@ public class ArrayQueue<E> implements Queue<E> {
 	public int getSize() {
 		return size;
 	}
+
+	@Override
+	public E[] getArray() {
+		return array.clone();
+	}
 }
