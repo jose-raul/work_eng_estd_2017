@@ -16,7 +16,48 @@ public class Main {
 		TreeNode<String> f = c.addChild("F");
 		f.addChild("G");
 		
-		bfs(root);
+		System.out.println(search(root, "F"));
+		System.out.println(search(root, "P"));
+
+		System.out.println(searchLevel(root, "F"));
+		System.out.println(searchLevel(root, "P"));
+	
+	}
+	
+	public static int searchLevel (TreeNode<String> node, String s) {
+		int counter = 1;
+		Queue<TreeNode<String>> queue = new LinkedList<>();
+		queue.add(node);
+		while(!queue.isEmpty()){
+			counter++;
+			TreeNode<String> processing = queue.poll();
+			if (processing.getValue().equals(s)) {
+				return counter;
+			}
+			for (TreeNode<String> treeNode : processing.getChildren()) {
+				queue.add(treeNode);
+			}
+		}
+		
+		return -1;
+	
+	}
+	
+	public static boolean search (TreeNode<String> node, String s) {
+		Queue<TreeNode<String>> queue = new LinkedList<>();
+		queue.add(node);
+		while(!queue.isEmpty()){
+			TreeNode<String> processing = queue.poll();
+			if (processing.getValue().equals(s)) {
+				return true;
+			}
+			for (TreeNode<String> treeNode : processing.getChildren()) {
+				queue.add(treeNode);
+			}
+		}
+		
+		return false;
+	
 	}
 	
 	public static void bfs(TreeNode<String> node) {
