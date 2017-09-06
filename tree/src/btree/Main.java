@@ -6,16 +6,26 @@ import java.util.Queue;
 public class Main {
 
 	public static void main(String[] args) {
-		BTree<Integer> btree = new BTree<>(6);
-
+/*		BTree<Integer> btree = new BTree<>(6);
 		BTreeNode<Integer> four = btree.getRoot().addLeftChild(4);
 		BTreeNode<Integer> seven = btree.getRoot().addRightChild(7);
-
 		four.addLeftChild(3);
 		four.addRightChild(5);
 		seven.addRightChild(9);
-
 		traverseDFS(btree.getRoot());
+		traverseBFS(btree.getRoot());*/
+		
+		BTree<Integer> btree = new BTree<>(7);
+		
+		btree.insert(5);
+		btree.insert(4);
+		btree.insert(6);
+		btree.insert(8);
+		btree.insert(9);
+		
+		System.out.println(btree.search(6));
+		System.out.println(btree.search(3));
+		
 		traverseBFS(btree.getRoot());
 
 	}
@@ -46,3 +56,4 @@ public class Main {
 	}
 
 }
+
