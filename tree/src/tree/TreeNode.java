@@ -6,23 +6,31 @@ import java.util.List;
 public class TreeNode<E> {
 
 	private E value;
-	
+
 	private TreeNode<E> parent;
-	
+
 	private List<TreeNode<E>> children;
 
 	public TreeNode(E e) {
 		value = e;
 		children = new LinkedList<>();
 	}
-	
+
+	public String makeWord() {
+		if (isRoot()) {
+			return value.toString();
+		} else {
+			return getParent().makeWord() + getValue().toString();
+		}
+	}
+
 	public TreeNode<E> addChild(E e) {
 		TreeNode<E> child = new TreeNode<>(e);
 		child.setParent(this);
 		children.add(child);
 		return child;
 	}
-	
+
 	public boolean isRoot() {
 		return (parent == null);
 	}
@@ -50,8 +58,7 @@ public class TreeNode<E> {
 	public void setChildren(List<TreeNode<E>> children) {
 		this.children = children;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return value.toString();
