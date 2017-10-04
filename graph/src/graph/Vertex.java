@@ -1,13 +1,13 @@
 package graph;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Vertex<E> {
 
 	private E value;
 
-	private Set<Edge> neighbors = new HashSet<>();
+	private Set<Edge> neighbors = new LinkedHashSet<>();
 
 	public Vertex(E value) {
 		this.value = value;
@@ -27,6 +27,11 @@ public class Vertex<E> {
 
 	public E getValue() {
 		return value;
+	}
+	
+	@Override
+	public String toString() {
+		return value.toString();
 	}
 
 	class Edge {
