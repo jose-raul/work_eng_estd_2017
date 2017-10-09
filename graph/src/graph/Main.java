@@ -24,27 +24,29 @@ public class Main {
 		graph.addVertex(two);
 		graph.addVertex(three);
 		graph.addVertex(four);
-		
-		zero.addEdge(one);
+
+		zero.addEdge(one, 20);
 		zero.addEdge(three);
 		zero.addEdge(four);
 		one.addEdge(two);
 		two.addEdge(three);
 		four.addEdge(three);
 
-		System.out.println(findAllPaths(four, three));
+		System.out.println(findAllPaths(zero, three));
 
 	}
 
+	public static Set<Vertex<Integer>> findShortestPath(Vertex<Integer> source, Vertex<Integer> target) {
+		
+	}
+	
 	public static List<Set<Vertex<Integer>>> findAllPaths(Vertex<Integer> source, Vertex<Integer> target) {
 		List<Set<Vertex<Integer>>> paths = new LinkedList<Set<Vertex<Integer>>>();
 		findPaths(source, target, paths, new LinkedHashSet<Vertex<Integer>>());
 		return paths;
 	}
 
-	private static void findPaths(Vertex<Integer> current, 
-			Vertex<Integer> target, 
-			List<Set<Vertex<Integer>>> paths,
+	private static void findPaths(Vertex<Integer> current, Vertex<Integer> target, List<Set<Vertex<Integer>>> paths,
 			Set<Vertex<Integer>> path) {
 
 		path.add(current);
