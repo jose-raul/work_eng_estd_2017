@@ -1,71 +1,99 @@
 package graph;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-import graph.Vertex.Edge;
-
 public class Main {
 
 	public static void main(String[] args) {
 		Graph<Integer> graph = new Graph<>();
-		Vertex<Integer> zero = new Vertex<>(0);
-		Vertex<Integer> one = new Vertex<>(1);
-		Vertex<Integer> two = new Vertex<>(2);
-		Vertex<Integer> three = new Vertex<>(3);
-		Vertex<Integer> four = new Vertex<>(4);
-
-		graph.addVertex(zero);
-		graph.addVertex(one);
-		graph.addVertex(two);
-		graph.addVertex(three);
-		graph.addVertex(four);
+		Vertex<Integer> zero = graph.addVertex(0);
+		Vertex<Integer> one = graph.addVertex(1);
+		Vertex<Integer> two = graph.addVertex(2);
+		Vertex<Integer> three = graph.addVertex(3);
+		Vertex<Integer> four = graph.addVertex(4);
 
 		zero.addEdge(one, 20);
-		zero.addEdge(three);
-		zero.addEdge(four);
-		one.addEdge(two);
-		two.addEdge(three);
-		four.addEdge(three);
-
-		System.out.println(findAllPaths(zero, three));
-
-	}
-
-	public static Set<Vertex<Integer>> findShortestPath(Vertex<Integer> source, Vertex<Integer> target) {
+		zero.addEdge(three, 70);
+		zero.addEdge(four, 40);
+		one.addEdge(two, 15);
+		two.addEdge(three, 30);
+		four.addEdge(three, 35);
 		
+		System.out.println(graph.findShortestPath(zero, three));
+		System.out.println(graph.findShortestPathLambda(zero, three));
+		
+/*		System.out.println(findAllPaths(zero, three));
+		System.out.println(findShortestPathLambda(zero, three));
+		System.out.println(findShortestPath(zero, three));*/
+
 	}
-	
-	public static List<Set<Vertex<Integer>>> findAllPaths(Vertex<Integer> source, Vertex<Integer> target) {
-		List<Set<Vertex<Integer>>> paths = new LinkedList<Set<Vertex<Integer>>>();
-		findPaths(source, target, paths, new LinkedHashSet<Vertex<Integer>>());
+
+	public static Path_bak<Integer> findShortestPathLambda(
+			Vertex<Integer> source, 
+			Vertex<Integer> target) {
+		
+		List<Path_bak<Integer>> paths = new LinkedList<Path_bak<Integer>>();
+		findPaths(source, target, paths, new Path_bak<Integer>());
+		return paths.stream().min((a, b) -> a.compareTo(b)).get();
+	}
+
+	public static Path_bak<Integer> findShortestPath(
+			Vertex<Integer> source, 
+			Vertex<Integer> target) {
+		
+		List<Path_bak<Integer>> paths = new LinkedList<Path_bak<Integer>>();
+		findPaths(source, target, paths, new Path_bak<Integer>());
+		Path_bak<Integer> result = paths.get(0);
+		
+		for (Path_bak<Integer> path : paths) {
+			if (path.getWeight().compareTo(result.getWeight()) < 0) {
+				result = path;
+			}
+		}
+		
+		return result;
+	}
+
+	public static List<Path_bak<Integer>> findAllPaths(
+			Vertex<Integer> source, 
+			Vertex<Integer> target) {
+		
+		List<Path_bak<Integer>> paths = new LinkedList<Path_bak<Integer>>();
+		findPaths(source, target, paths, new Path_bak<Integer>());
 		return paths;
 	}
 
-	private static void findPaths(Vertex<Integer> current, Vertex<Integer> target, List<Set<Vertex<Integer>>> paths,
-			Set<Vertex<Integer>> path) {
+	private static void findPaths(
+			Vertex<Integer> current, 
+			Vertex<Integer> target, 
+			List<Path_bak<Integer>> paths,
+			Path_bak<Integer> path) {
 
-		path.add(current);
+		path.getVertices().add(current);
 
 		if (current.equals(target)) {
-			paths.add(new LinkedHashSet<Vertex<Integer>>(path));
-			path.remove(current);
+			paths.add(path.copy());
+			path.getVertices().remove(current);
+			path.setWeight(0);
 			return;
 		}
 
 		for (Vertex<Integer>.Edge edge : current.getNeighbors()) {
+			path.setWeight(path.getWeight() + edge.getWeight());
 			findPaths(edge.getDestination(), target, paths, path);
 		}
 
-		path.remove(current);
-
+		path.getVertices().remove(current);
 	}
 
-	public static boolean hasPath(Vertex<Integer> source, Vertex<Integer> destination) {
+	public static boolean hasPath(
+			Vertex<Integer> source, 
+			Vertex<Integer> destination) {
+
 		Set<Vertex<Integer>> visited = new HashSet<>();
 		Queue<Vertex<Integer>> queue = new LinkedList<>();
 		queue.add(source);
@@ -77,7 +105,7 @@ public class Main {
 				return true;
 			}
 			Set<Vertex<Integer>.Edge> neighbors = vertex.getNeighbors();
-			for (Edge edge : neighbors) {
+			for (Vertex<Integer>.Edge edge : neighbors) {
 				Vertex<Integer> neighbor = edge.getDestination();
 				if (!visited.contains(neighbor)) {
 					queue.add(neighbor);
@@ -98,7 +126,7 @@ public class Main {
 			Vertex<Integer> vertex = queue.poll();
 			System.out.println(vertex.getValue());
 			Set<Vertex<Integer>.Edge> neighbors = vertex.getNeighbors();
-			for (Edge edge : neighbors) {
+			for (Vertex<Integer>.Edge edge : neighbors) {
 				Vertex<Integer> neighbor = edge.getDestination();
 				if (!visited.contains(neighbor)) {
 					queue.add(neighbor);
